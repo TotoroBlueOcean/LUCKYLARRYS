@@ -11,13 +11,6 @@ import styled from 'styled-components';
 
 function SupportAgent() {
   const answers = {
-    init: [
-      '1Please let me know how I may assist you today:',
-      '0',
-      '2I\'ve lost all my money.',
-      '2Could I get a refund?',
-      '2How do I log in?',
-    ],
     Yes: [
       '1Please let me know how I may assist you today:',
       '0',
@@ -55,13 +48,12 @@ function SupportAgent() {
 
   const [msgHistory, setMsgHistory] = useState([
     '1Hey there! 👋 My name is Alice.',
-  ].concat(answers.init));
+  ].concat(answers.Yes));
 
   const scrollContainer = useRef(null);
 
   useEffect(() => {
     if (scrollContainer) {
-      console.log('scrolling');
       scrollContainer.current.scrollIntoView({ behavior: 'smooth' });
     }
   }, [msgHistory, scrollContainer]);
@@ -74,12 +66,12 @@ function SupportAgent() {
     <SupportAgentContainer>
       {msgHistory.map((msg) => {
         const code = msg[0];
-        const message = msg.slice(1);
-        if (code === '0') {
-          return <Spacer />;
+        if (Number.isNaN(Number(code))) {
+          console.error('missing code in support agent message');
         }
+        const message = msg.slice(1);
         if (code === '1') {
-          return <SupportText>{message}</SupportText>;
+          return <TextUniversal>{message}</TextUniversal>;
         }
         if (code === '2') {
           return (
@@ -93,6 +85,8 @@ function SupportAgent() {
         if (code === '3') {
           return <UserText>{message}</UserText>;
         }
+        // code === 0
+        return <Spacer />;
       })}
       <div
         ref={scrollContainer}
@@ -118,9 +112,6 @@ const TextUniversal = styled.p`
 
 const Spacer = styled.div`
   height: 20px;
-`;
-
-const SupportText = styled(TextUniversal)`
 `;
 
 const UserText = styled(TextUniversal)`
