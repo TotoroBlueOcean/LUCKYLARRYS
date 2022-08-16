@@ -12,6 +12,7 @@ import Roulette from './components/roulette/Roulette';
 import ScratchTicket from './components/scratch-ticket/ScratchTicket';
 import Slots from './components/slots/Slots';
 import NavBar from './NavBar';
+import SupportAgent from './components/support-agent/SupportAgent';
 
 const dummyData = {
   username: 'LarryLucky',
@@ -51,6 +52,10 @@ function Router() {
         <Route
           path="/sidebar"
           element={<Sidebar />}
+        />
+        <Route
+          path="/support"
+          element={<SupportAgent />}
         />
         <Route
           path="/"
