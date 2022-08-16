@@ -1,3 +1,5 @@
+/* eslint-disable react/no-array-index-key */
+// ^ Support allows for repeat messages
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 
@@ -64,18 +66,19 @@ function SupportAgent() {
 
   return (
     <SupportAgentContainer>
-      {msgHistory.map((msg) => {
+      {msgHistory.map((msg, index) => {
         const code = msg[0];
         if (Number.isNaN(Number(code))) {
           console.error('missing code in support agent message');
         }
         const message = msg.slice(1);
         if (code === '1') {
-          return <TextUniversal>{message}</TextUniversal>;
+          return <TextUniversal key={`${msg}@${index}`}>{message}</TextUniversal>;
         }
         if (code === '2') {
           return (
             <Question
+              key={`${msg}@${index}`}
               onClick={() => { answerQuestion(message); }}
             >
               {message}
@@ -83,10 +86,10 @@ function SupportAgent() {
           );
         }
         if (code === '3') {
-          return <UserText>{message}</UserText>;
+          return <UserText key={`${msg}@${index}`}>{message}</UserText>;
         }
         // code === 0
-        return <Spacer />;
+        return <Spacer key={`${msg}@${index}`} />;
       })}
       <div
         ref={scrollContainer}
