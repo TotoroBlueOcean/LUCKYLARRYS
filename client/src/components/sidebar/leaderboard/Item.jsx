@@ -13,23 +13,21 @@ export default function Item({ user, index }) {
   }, []);
 
   return (
-    <li
-      className="item"
-      style={{
-        display: 'grid',
-        justifyItems: 'center',
-        gridAutoFlow: 'column',
-      }}
-    >
-      <span className="rank">{index + 1}</span>
-      <img
-        src={flags[country]}
-        className="flag"
-        alt={country}
-      />
-      <span className="username">{user.username}</span>
-      <span className="winnings">${user.winnings}</span>
-    </li>
+    <tr>
+      <td className="rank">
+        <span>{index + 1}</span>
+      </td>
+      <td>
+        <img
+          src={flags[country]}
+          className="flag"
+          alt={country}
+        />
+      </td>
+
+      <td className="leaderboard-username"><span>{user.username}</span></td>
+      <td className="leaderboard-winnings"><span>{user.winnings}</span></td>
+    </tr>
   );
 }
 

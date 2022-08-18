@@ -75,9 +75,3 @@ Sidebar.propTypes = {
 };
 
 export default Sidebar;
-
-export const SidebarContainer = styled.div`
-  display: grid;
-  margin: 0 auto;
-  height: 90%;
-`;
