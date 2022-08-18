@@ -1,18 +1,9 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-restricted-syntax */
-/* eslint-disable guard-for-in */
-/* eslint-disable react/prop-types */
-/* eslint-disable no-console */
 /* eslint-disable no-alert */
-/* eslint-disable object-shorthand */
-
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-
 import { Wheel } from 'react-custom-roulette';
 import styled from 'styled-components';
-import Confetti from 'react-confetti';
-
+import PropTypes from 'prop-types';
 import WinningEffect from '../shared/WinningEffect';
 
 const data = [
@@ -79,8 +70,8 @@ export default function RouletteWheel({
   const handleSpinClick = () => {
     axios.get('/api/roulette', {
       params: {
-        betInfo: betInfo,
-        user: user,
+        betInfo,
+        user,
       },
     })
       .then((response) => {
@@ -93,7 +84,7 @@ export default function RouletteWheel({
           return;
         }
         let betAmount = 0;
-        Object.entries(betInfo).forEach(([key, value]) => {
+        Object.values(betInfo).forEach((value) => {
           betAmount += Number(value.bet);
         });
         const updatedBalance = user.balance - betAmount;
@@ -112,6 +103,7 @@ export default function RouletteWheel({
 
   useEffect(winningEffect, [winState]);
 
+  console.log(betInfo);
   return (
     <RouletteWheelContainer className="App">
       <WinEffectContainer>
@@ -143,7 +135,7 @@ export default function RouletteWheel({
               setWinState(true);
               setUser({ ...user, balance: updatedBalance });
             } else {
-              window.alert('You did not win this time 👉👈 ')
+              window.alert('You did not win this time 👉👈 ');
               setUser({ ...user, balance: updatedBalance });
             }
           }}
@@ -157,16 +149,33 @@ export default function RouletteWheel({
   );
 }
 
+RouletteWheel.propTypes = {
+  betInfo: PropTypes.shape({
+
+  }).isRequired,
+  user: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    username: PropTypes.string.isRequired,
+    password: PropTypes.string.isRequired,
+    countryid: PropTypes.number.isRequired,
+    balance: PropTypes.number.isRequired,
+    winnings: PropTypes.number.isRequired,
+  }).isRequired,
+  setUser: PropTypes.func.isRequired,
+  spin: PropTypes.bool.isRequired,
+  setSpin: PropTypes.func.isRequired,
+};
+
 export const RouletteWheelContainer = styled.div`
   margin: 0 auto;
 `;
-export const SpinButton = styled.button`
 
-&:after {
-  background-color: #FDA300;
-  background-image: linear-gradient(to right, #1E2F97, #4ADEDE);
-}
-background-color: #194569;
+export const SpinButton = styled.button`
+  &:after {
+    background-color: #FDA300;
+    background-image: linear-gradient(to right, #1E2F97, #4ADEDE);
+  }
+  background-color: #194569;
 `;
 export const WinEffectContainer = styled.div`
   z-index: 20;

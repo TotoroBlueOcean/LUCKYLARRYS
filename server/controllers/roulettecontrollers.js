@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-expressions */
 const { Pool } = require('pg');
 const { getBalance, updateBalanceBasedOnWinnings, updateBalanceAfterLosing } = require('../../database/controllers');
 
@@ -56,5 +55,8 @@ module.exports.checkNum = async (req, res) => {
         res.status(200).send({ winNum, winAmount: winnings, updatedBalance });
       }
     })
-    .catch((err) => { res.status(500); console.log(err); });
+    .catch((err) => {
+      res.status(500);
+      console.log(err);
+    });
 };

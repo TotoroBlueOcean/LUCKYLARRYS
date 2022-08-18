@@ -26,7 +26,7 @@ function SignUpModal({ setModal }) {
   async function handleSubmit() {
     if (info.password !== info.reEnterPassword || info.username === '' || info.password === '') return;
 
-    let res = await axios.post('/api/user', info);
+    await axios.post('/api/user', info);
     // need to check what happens when username already exists
 
     setModal(false);

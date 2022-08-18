@@ -14,10 +14,10 @@ const {
   postGlobalChat,
   updateBalanceBasedOnWinnings,
 } = require('../database/controllers');
-const roulette = require('./controllers/roulettecontrollers');
+const { checkNum } = require('./controllers/roulettecontrollers');
 
 router.put('/slots', slots);
-router.get('/roulette', roulette.checkNum);
+router.get('/roulette', checkNum);
 
 router.get('/users/:userID/friends', getAllFriends);
 

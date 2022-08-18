@@ -28,12 +28,19 @@ export default function Item({ user, index }) {
         alt={country}
       />
       <span className="username">{user.username}</span>
-      <span className="winnings">${user.winnings}</span>
+      <span className="winnings">{`$${user.winnings}`}</span>
     </li>
   );
 }
 
 Item.propTypes = {
-  user: PropTypes.object.isRequired,
+  user: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    username: PropTypes.string.isRequired,
+    password: PropTypes.string.isRequired,
+    countryid: PropTypes.number.isRequired,
+    balance: PropTypes.number.isRequired,
+    winnings: PropTypes.number.isRequired,
+  }).isRequired,
   index: PropTypes.number.isRequired,
 };

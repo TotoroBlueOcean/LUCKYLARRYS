@@ -4,7 +4,17 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Modal from './Modal';
-import { GreenWhiteButton, YellowOrangeButton, PinkRedButton, BlueBlackButton, GreenBlackButton, BlueAquaButton, BlueLightBlueButton, LightPurplePulpleButton, PurplePinkButton } from '../shared/button.styled.js';
+import {
+  GreenWhiteButton,
+  YellowOrangeButton,
+  PinkRedButton,
+  BlueBlackButton,
+  GreenBlackButton,
+  BlueAquaButton,
+  BlueLightBlueButton,
+  LightPurplePurpleButton,
+  PurplePinkButton,
+} from '../shared/button.styled';
 
 export default function BetTable({ setBetInfo, spin }) {
   // userbet refactor to remove initial pick bets
@@ -70,7 +80,7 @@ export default function BetTable({ setBetInfo, spin }) {
           {[...Array(36)].map((rouletteNum, index) => {
             const val = index + 1;
             return (
-              <YellowOrangeButton key={index} onClick={() => { setNum({ pick: val }); openModal(`${val}`); }}>
+              <YellowOrangeButton key={val} onClick={() => { setNum({ pick: val }); openModal(`${val}`); }}>
                 {val}
                 &nbsp;
               </YellowOrangeButton>
@@ -78,8 +88,8 @@ export default function BetTable({ setBetInfo, spin }) {
           })}
         </BetNumberGrid>
         <BetColorOddGrid>
-          <PinkRedButton onClick={() => { setColor({ pick: 'red' }); openModal('red') }}>Red</PinkRedButton>
-          <BlueBlackButton onClick={() => { setColor({ pick: 'black' }); openModal('black') }}>Black</BlueBlackButton>
+          <PinkRedButton onClick={() => { setColor({ pick: 'red' }); openModal('red'); }}>Red</PinkRedButton>
+          <BlueBlackButton onClick={() => { setColor({ pick: 'black' }); openModal('black'); }}>Black</BlueBlackButton>
           <GreenBlackButton onClick={() => { setEO({ pick: 'odd' }); openModal('odd'); }}>Even</GreenBlackButton>
           <BlueAquaButton onClick={() => { setEO({ pick: 'even' }); openModal('even'); }}>Odd</BlueAquaButton>
         </BetColorOddGrid>
@@ -91,8 +101,8 @@ export default function BetTable({ setBetInfo, spin }) {
         </Bet12Grid>
 
         <Bet18Grid>
-          <LightPurplePulpleButton onClick={() => { setFirstHalf({ pick: 1 }); openModal('1 to 18'); }}>1to18 </LightPurplePulpleButton>
-          <LightPurplePulpleButton onClick={() => { setFirstHalf({ pick: 2 }); openModal('19 to 36'); }}>19to36 </LightPurplePulpleButton>
+          <LightPurplePurpleButton onClick={() => { setFirstHalf({ pick: 1 }); openModal('1 to 18'); }}>1to18 </LightPurplePurpleButton>
+          <LightPurplePurpleButton onClick={() => { setFirstHalf({ pick: 2 }); openModal('19 to 36'); }}>19to36 </LightPurplePurpleButton>
         </Bet18Grid>
 
         <BetRowGrid>
@@ -116,12 +126,15 @@ export default function BetTable({ setBetInfo, spin }) {
           {(numRow.pick && numRow.bet) ? `$${numRow.bet} on ${numRow.pick === 1 ? '1s row' : numRow.pick === 2 ? '2s row' : numRow.pick === 3 ? '3s row' : null}.` : null}
           &nbsp;
         </div>
-      </BetTableContainer >
-    </div >
+      </BetTableContainer>
+    </div>
   );
 }
 
-BetTable.propTypes = { setBetInfo: PropTypes.func.isRequired };
+BetTable.propTypes = {
+  setBetInfo: PropTypes.func.isRequired,
+  spin: PropTypes.bool.isRequired,
+};
 
 export const RouletteInfo1Grid = styled.div`
   display: grid;
@@ -130,6 +143,7 @@ export const RouletteInfo1Grid = styled.div`
   grid-template-columns: auto auto auto;
   gap: 5%;
 `;
+
 export const GameDisplay = styled.div`
   margin: 0 auto;
   width: 300px;
@@ -139,6 +153,7 @@ export const GameDisplay = styled.div`
 export const BetTableContainer = styled.div`
   margin: 0 auto;
 `;
+
 export const BetNumberGrid = styled.div`
   display: grid;
   max-width: 100%;

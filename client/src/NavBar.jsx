@@ -4,10 +4,19 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import SignUpModal from './components/modal/SignUpModal';
 import BalanceModal from './components/modal/BalanceModal';
-import { GreenWhiteButton, YellowOrangeButton, PinkRedButton, BlueBlackButton, GreenBlackButton, BlueAquaButton, BlueLightBlueButton, LightPurplePulpleButton, PurplePinkButton } from './components/shared/button.styled.js';
+import {
+  PinkRedButton,
+  BlueLightBlueButton,
+  LightPurplePurpleButton,
+  PurplePinkButton,
+} from './components/shared/button.styled';
 
 function NavBar({
-  user, setUser, loggedIn, setLoggedIn, setShowLoginModal,
+  user,
+  setUser,
+  loggedIn,
+  setLoggedIn,
+  setShowLoginModal,
 }) {
   const [showSignUpModal, setShowSignUpModal] = useState(false);
   const [showBalanceModal, setShowBalanceModal] = useState(false);
@@ -38,13 +47,16 @@ function NavBar({
   function handleLogout() {
     setLoggedIn(false);
     setUser();
-    // send them back to homepage?
   }
 
   return (
     <NavBarGrid>
       {showBalanceModal && (
-        <BalanceModal user={user} setUser={setUser} setModal={setShowBalanceModal} />
+        <BalanceModal
+          user={user}
+          setUser={setUser}
+          setModal={setShowBalanceModal}
+        />
       )}
       {showSignUpModal && (
         <SignUpModal setModal={setShowSignUpModal} />
@@ -61,8 +73,7 @@ function NavBar({
             className="navbar-item"
             onClick={() => openBalanceModal()}
           >
-            Balance is $
-            {user.balance}
+            {`Balance is $${user.balance}`}
           </BlueLightBlueButton>
         ) : null}
         {!loggedIn ? (
@@ -74,17 +85,20 @@ function NavBar({
             >
               Login
             </PurplePinkButton>
-            <LightPurplePulpleButton
+            <LightPurplePurpleButton
               type="submit"
               className="navbar-item"
               onClick={() => openSignUpModal(true)}
             >
               Sign Up
-            </LightPurplePulpleButton>
+            </LightPurplePurpleButton>
           </>
         ) : (
           <>
-            <BlueLightBlueButton type="submit" className="navbar-item">
+            <BlueLightBlueButton
+              type="submit"
+              className="navbar-item"
+            >
               {user.username}
             </BlueLightBlueButton>
             <BlueLightBlueButton
@@ -119,16 +133,16 @@ NavBar.propTypes = {
 export default NavBar;
 
 export const NavBarGrid = styled.div`
-// display: grid;
-// max-width: 100%;
-// margin: 0 auto;
-// height: 100%;
+  display: grid;
+  max-width: 100%;
+  margin: 0 auto;
+  height: 100%;
 
-// color: white;
-// @media (min-width: 501px) {
-//   grid-template-column: auto auto auto auto;
-// }
-// @media (max-width: 500px) {
-//   grid-template-column: auto auto;
-// }
-`
+  color: white;
+  @media (min-width: 501px) {
+    grid-template-column: auto auto auto auto;
+  }
+  @media (max-width: 500px) {
+    grid-template-column: auto auto;
+  }
+`;

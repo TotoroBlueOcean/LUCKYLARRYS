@@ -30,4 +30,4 @@ package-lock.json
 bundle.js
 
 # DS Store
-.DS_Store
+**/.DS_Store

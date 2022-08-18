@@ -62,7 +62,7 @@ export default function Modal({
                 {currentBetOption}
               </ModalInnerStyled>
               <ModalForm onSubmit={(event) => handleSubmit(event)}>
-                <input id="betAmount" type="text" placeholder="place bet amount here" onChange={() => setBetAmount(event.target.value)} required />
+                <input id="betAmount" type="text" placeholder="place bet amount here" onChange={(event) => setBetAmount(event.target.value)} required />
                 <button type="submit" onClick={(e) => handleSubmit(e)}>Submit Bet</button>
               </ModalForm>
             </ModalWrapper>

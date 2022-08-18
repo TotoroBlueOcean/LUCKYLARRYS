@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/forbid-prop-types */
-import React, { } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Sidebar from '../sidebar/Sidebar';
@@ -21,9 +21,7 @@ const renderGame = (game, user, setUser) => {
 function Gamepage({ game, user, setUser }) {
   return (
     <GamePageGrid className="game-container">
-      <GameContainer>
-        {renderGame(game, user, setUser)}
-      </GameContainer>
+      <GameContainer>{renderGame(game, user, setUser)}</GameContainer>
       <SidebarContainer>
         <Sidebar user={user} loginTime={Date.now()} />
       </SidebarContainer>
@@ -31,7 +29,18 @@ function Gamepage({ game, user, setUser }) {
   );
 }
 
-export default Gamepage;
+Gamepage.propTypes = {
+  game: PropTypes.string.isRequired,
+  user: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    username: PropTypes.string.isRequired,
+    password: PropTypes.string.isRequired,
+    countryid: PropTypes.number.isRequired,
+    balance: PropTypes.number.isRequired,
+    winnings: PropTypes.number.isRequired,
+  }).isRequired,
+  setUser: PropTypes.func.isRequired,
+};
 
 export const GamePageGrid = styled.div`
   display: grid;
@@ -55,3 +64,5 @@ export const GameContainer = styled.div`
 export const SidebarContainer = styled.div`
   max-width: 100%;
 `;
+
+export default Gamepage;
