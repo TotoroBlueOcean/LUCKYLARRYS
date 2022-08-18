@@ -9,7 +9,6 @@ import WinningEffect from '../shared/WinningEffect';
 import LarryBackground from '../../../dist/background/LarryBackground.jpeg';
 import scratchBackground from '../../../dist/background/scratch_ticket.jpeg';
 
-
 const GRID_COLS = 5;
 const winningsArr = [0, 0, 1, 10, 25, 100]; // 0-5 matches
 
@@ -76,7 +75,7 @@ export default function ScratchTicket({ user, setUser }) {
     });
 
     if (winnings > 0) {
-      console.log('winnings is: ', winnings)
+      console.log('winnings is: ', winnings);
       setConfirmWinnings(true);
       setWinningAnimation(true);
     } else {
@@ -93,7 +92,6 @@ export default function ScratchTicket({ user, setUser }) {
     if (bet >= 0 && bet <= user.balance) {
       setPlaying(true);
     }
-
   }
 
   function handlePlayAgain() {
@@ -114,9 +112,8 @@ export default function ScratchTicket({ user, setUser }) {
 
   return (
     <ScratchGrid>
-    <Game>
-      {winningAnimation && <WinningEffect />}
-      <Form>
+      <Game>
+        {winningAnimation && <WinningEffect />}
         <input
           className="input-lg"
           type="number"
@@ -126,71 +123,69 @@ export default function ScratchTicket({ user, setUser }) {
           disabled={playing}
           onChange={(e) => changeBet(e)}
         />
-      </Form>
-      {/* <BetButton onClick={() => confirmPlay()}>Bet</BetButton> */}
-      <Scratcher>
-        {!playing ? (
-          <ConfirmOverlay onClick={() => confirmPlay()}>
-          </ConfirmOverlay>
-        ) : (
-          <ScratchCard
-            width={500}
-            height={600}
-            image={LarryBackground}
-            finishPercent={80}
-            onComplete={() => getWinnings()}
-          >
-            <WinningVals>
-              {winningValues.map((num) => (
-                <Tile key={num}>{num}</Tile>
-              ))}
-            </WinningVals>
-            <MatchingVals>
-              {matchingValues.map((num) => (
-                <ScratchTicketNumber
-                  key={num}
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    width: '100%',
-                    height: '70px',
-                    border: '1px solid white',
-                    borderRadius: '100px',
-                    backgroundColor: '#FE53BB',
-                  }}
-                >
-                  {num}
-                </ScratchTicketNumber>
-              ))}
-            </MatchingVals>
-          </ScratchCard>
-        )}
-        {confirmWinnings && (
-          <ConfirmOverlay>
-            <WinningText>{`Congratulations you won $${winningAmount}`}</WinningText>
-            <WinningText>
-              {`You had ${numMatches} `}
-              matches
-            </WinningText>
-            <button type="submit" onClick={() => handlePlayAgain()}>
-              Play again?
-            </button>
-          </ConfirmOverlay>
-        )}
-        {notWinState && (
-          <ConfirmOverlay>
-            <WinningText>
-              {`You had ${numMatches} `}
-              matches
-            </WinningText>
-            <button type="submit" onClick={() => handlePlayAgain()}>
-              Play again?
-            </button>
-          </ConfirmOverlay>
-        )}
-      </Scratcher>
-    </Game>
+        {/* <BetButton onClick={() => confirmPlay()}>Bet</BetButton> */}
+        <Scratcher>
+          {!playing ? (
+            <ConfirmOverlay onClick={() => confirmPlay()} />
+          ) : (
+            <ScratchCard
+              width={500}
+              height={600}
+              image={LarryBackground}
+              finishPercent={80}
+              onComplete={() => getWinnings()}
+            >
+              <WinningVals>
+                {winningValues.map((num) => (
+                  <Tile key={num}>{num}</Tile>
+                ))}
+              </WinningVals>
+              <MatchingVals>
+                {matchingValues.map((num) => (
+                  <ScratchTicketNumber
+                    key={num}
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      width: '100%',
+                      height: '70px',
+                      border: '1px solid white',
+                      borderRadius: '100px',
+                      backgroundColor: '#FE53BB',
+                    }}
+                  >
+                    {num}
+                  </ScratchTicketNumber>
+                ))}
+              </MatchingVals>
+            </ScratchCard>
+          )}
+          {confirmWinnings && (
+            <ConfirmOverlay>
+              <WinningText>{`Congratulations you won $${winningAmount}`}</WinningText>
+              <WinningText>
+                {`You had ${numMatches} `}
+                matches
+              </WinningText>
+              <button type="submit" onClick={() => handlePlayAgain()}>
+                Play again?
+              </button>
+            </ConfirmOverlay>
+          )}
+          {notWinState && (
+            <ConfirmOverlay>
+              <WinningText>
+                {`You had ${numMatches} `}
+                matches
+              </WinningText>
+              <button type="submit" onClick={() => handlePlayAgain()}>
+                Play again?
+              </button>
+            </ConfirmOverlay>
+          )}
+        </Scratcher>
+      </Game>
     </ScratchGrid>
   );
 }
@@ -209,10 +204,11 @@ ScratchTicket.propTypes = {
 
 const ScratchGrid = styled.div`
 display: grid;
+height: 600px;
 max-width: 90%;
 margin: 0 auto;
 grid-template-rows: auto auto;
-`
+`;
 
 const Game = styled.form`
   display: flex;
