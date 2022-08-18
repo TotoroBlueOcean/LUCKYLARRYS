@@ -168,11 +168,11 @@ export default function ScratchTicket({ user, setUser }) {
         )}
         {confirmWinnings && (
           <ConfirmOverlay>
-            <div>{`Congratulations you won $${winningAmount}`}</div>
-            <div>
+            <WinningText>{`Congratulations you won $${winningAmount}`}</WinningText>
+            <WinningText>
               {`You had ${numMatches} `}
               matches
-            </div>
+            </WinningText>
             <button type="submit" onClick={() => handlePlayAgain()}>
               Play again?
             </button>
@@ -180,11 +180,10 @@ export default function ScratchTicket({ user, setUser }) {
         )}
         {notWinState && (
           <ConfirmOverlay>
-            <div>{`Click to play again`}</div>
-            <div>
+            <WinningText>
               {`You had ${numMatches} `}
               matches
-            </div>
+            </WinningText>
             <button type="submit" onClick={() => handlePlayAgain()}>
               Play again?
             </button>
@@ -281,4 +280,11 @@ const ScratchTicketNumber = styled.div`
   margin: 10px;
   border-radius: 100px;
   background-image: linear-gradient(to right, #F5D300, #09FBD3);
+`;
+
+const WinningText = styled.div`
+  padding: 10px;
+  background-image: linear-gradient(to right, #F5D300, #09FBD3);
+  color: #000;
+  border-radius: 10px;
 `;
