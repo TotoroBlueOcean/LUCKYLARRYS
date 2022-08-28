@@ -5,6 +5,7 @@ import flags from '../flags';
 
 export default function Item({ user, index }) {
   const [country, setCountry] = useState('');
+  const winnings = Intl.NumberFormat('en-US', { maximumFractionDigits: 1, notation: 'compact', compactDisplay: 'short' }).format(user.winnings);
 
   useEffect(() => {
     axios.get(`http://localhost:3000/api/country/${user.countryid}`)
@@ -26,7 +27,7 @@ export default function Item({ user, index }) {
       </td>
 
       <td className="leaderboard-username"><span>{user.username}</span></td>
-      <td className="leaderboard-winnings"><span>{user.winnings}</span></td>
+      <td className="leaderboard-winnings"><span>{winnings}</span></td>
     </tr>
   );
 }

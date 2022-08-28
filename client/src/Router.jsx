@@ -7,7 +7,9 @@ import NavBar from './NavBar';
 import LoginModal from './components/modal/LoginModal';
 import '../dist/sidebar.css';
 import '../dist/leaderboard.css';
+import '../dist/friends.css';
 import Gamepage from './components/gamepage/Gamepage';
+// import '../node_modules/emoji-picker-react/dist/main.css';
 
 function Router() {
   const [user, setUser] = useState(); // user data

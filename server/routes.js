@@ -12,7 +12,7 @@ const {
   addBalance,
   getGlobalChat,
   postGlobalChat,
-  updateBalanceBasedOnWinnings
+  updateBalanceBasedOnWinnings,
 } = require('../database/controllers');
 const roulette = require('./controllers/roulettecontrollers');
 
@@ -53,13 +53,14 @@ router.get('/user/:username', (req, res) => {
 
 router.post('/user', async (req, res) => {
   const user = await getSpecificUser(req.body.username);
-  if (user.length !== 0) res.status(404).send('User exists already'); // user exists
-
-  createUser(req.body)
-    .then((results) => {
-      res.status(201).send(results);
-    })
-    .catch((err) => res.sendStatus(404));
+  if (user.length !== 0) res.status(200).send('User exists already');
+  else {
+    createUser(req.body)
+      .then((results) => {
+        res.status(201).send(results);
+      })
+      .catch((err) => res.sendStatus(404));
+  }
 });
 
 router.post('/user/balance', (req, res) => {

@@ -10,10 +10,13 @@
   padding-top: 20px;
 }
 
+<<<<<<< HEAD
 .rank {
   display: flex;
 }
 
+=======
+>>>>>>> 9b3945ad52a8f939ed3ca45034e6dda1fcf521a6
 .leaderboard-results {
   overflow-y: scroll;
   text-align: center;
@@ -24,16 +27,18 @@
 .leaderboard-results thead th {
   padding: 5px;
   color: white;
-  font-size:14px;
+  font-size:16px;
   font-weight:bold;
 }
 .leaderboard-results tbody td {
   padding:0px;
   background:#282A31;
-  font-size:16px;
+  font-size:14px;
   border-bottom:5px solid #232323;
   height: 100%;
+  vertical-align: middle;
 }
+
 .leaderboard-results tbody tr {
     background: #282A31;
     color:white;
@@ -41,4 +46,21 @@
 
 .leaderboard-results tbody span {
   color:white;
+  padding-bottom: .1rem;
+}
+
+.flag {
+  margin: auto;
+}
+
+.leaderboard-results tbody tr:nth-child(1) {
+  border-left: solid 4px goldenrod;
+}
+
+.leaderboard-results tbody tr:nth-child(2) {
+  border-left: solid 4px silver;
+}
+
+.leaderboard-results tbody tr:nth-child(3) {
+  border-left: solid 4px #cd7f32;
 }

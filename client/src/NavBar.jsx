@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import CountUp from 'react-countup';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import SignUpModal from './components/modal/SignUpModal';
 import BalanceModal from './components/modal/BalanceModal';
+import backgroundMusic from '../dist/sound/backgroundMusic.mp3';
 import { GreenWhiteButton, YellowOrangeButton, PinkRedButton, BlueBlackButton, GreenBlackButton, BlueAquaButton, BlueLightBlueButton, LightPurplePulpleButton, PurplePinkButton } from './components/shared/button.styled.js';
 
 function NavBar({
@@ -11,6 +13,16 @@ function NavBar({
 }) {
   const [showSignUpModal, setShowSignUpModal] = useState(false);
   const [showBalanceModal, setShowBalanceModal] = useState(false);
+  const [prevBalance, setPrevBalance] = useState(undefined);
+  const [counterEl, setCounterEl] = useState(
+    (
+      <StyledCountUp
+        start={user?.balance}
+        end={user?.balance}
+        duration={1}
+      />
+    ),
+  );
 
   function openLoginModal() {
     // only have 1 modal open
@@ -41,6 +53,19 @@ function NavBar({
     // send them back to homepage?
   }
 
+  useEffect(() => {
+    if (user?.balance !== prevBalance) {
+      setCounterEl(
+        <StyledCountUp
+          start={prevBalance}
+          end={user?.balance}
+          duration={1}
+        />,
+      );
+      setPrevBalance(user?.balance);
+    }
+  }, [user?.balance]);
+
   return (
     <NavBarGrid>
       {showBalanceModal && (
@@ -62,7 +87,7 @@ function NavBar({
             onClick={() => openBalanceModal()}
           >
             Balance is $
-            {user.balance}
+            {counterEl}
           </BlueLightBlueButton>
         ) : null}
         {!loggedIn ? (
@@ -94,6 +119,11 @@ function NavBar({
             >
               Log Out
             </BlueLightBlueButton>
+            <audio
+              src={backgroundMusic}
+              autoPlay
+              loop
+            />
           </>
         )}
       </nav>
@@ -118,12 +148,15 @@ NavBar.propTypes = {
 
 export default NavBar;
 
+const StyledCountUp = styled(CountUp)`
+  color: white;
+`;
+
 export const NavBarGrid = styled.div`
 // display: grid;
 // max-width: 100%;
 // margin: 0 auto;
 // height: 100%;
-
 // color: white;
 // @media (min-width: 501px) {
 //   grid-template-column: auto auto auto auto;
@@ -131,4 +164,4 @@ export const NavBarGrid = styled.div`
 // @media (max-width: 500px) {
 //   grid-template-column: auto auto;
 // }
-`
+`;

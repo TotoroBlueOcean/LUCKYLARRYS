@@ -13,7 +13,7 @@ function Leaderboard() {
 
   return (
     <div className="leaderboard-container">
-      <table className="leaderboard-results">
+      <table className="leaderboard-results center-vert-horz">
         <thead>
           <tr>
             <th>Rank</th>
